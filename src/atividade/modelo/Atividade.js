@@ -1,4 +1,4 @@
-const {dataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize')
 const sequelize = require('../../config/database')
 
 const Atividade = sequelize.define('Atividade',{
@@ -12,7 +12,7 @@ const Atividade = sequelize.define('Atividade',{
         allowNull: false
     },
     data:{
-        type: DataTypes.date,
+        type: DataTypes.DATE,
         allowNull:false
     },
     carga_hr:{
@@ -20,19 +20,19 @@ const Atividade = sequelize.define('Atividade',{
         allowNull:false
     },
     vagas:{
-        type:DataTypes.integer,
+        type:DataTypes.INTEGER,
         allowNull:false
     },
     atividade:{
-        type: DataTypes.string,
+        type: DataTypes.STRING,
         allowNull:false
     },
     horario:{
-        type:DataTypes.string,
+        type:DataTypes.STRING,
         allowNull:false
     },
     inscricoes:{
-        type: DataTypes.integer,
+        type: DataTypes.INTEGER,
         allowNull:false
     }
 })

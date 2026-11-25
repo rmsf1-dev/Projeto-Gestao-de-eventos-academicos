@@ -1,19 +1,18 @@
-import Atividade from './Atividade.js'
-
+const Atividade = require('../modelo/Atividade.js')
 
 
 
 class AtividadeDAO {
     async criar(req, res) {
         try {
-            const { sala, data, carga_horaria, vagas, atividade, horario, inscricoes } = req.body
-            if (!sala || !data || !carga_horaria || !vagas || !atividade || !horario || !inscricoes) {
+            const { sala, data, carga_hr, vagas, atividade, horario, inscricoes } = req.body
+            if (sala === undefined || data === undefined || carga_hr === undefined || vagas === undefined || atividade === undefined || horario === undefined || inscricoes === undefined) { // ! rejeita 0, mesmo que ele seja válido, por isso coloca undefined
                 return res.status(400).json({
                     erro: 'Todos os campos são obrigatórios!!'
                 })
             }
             const evento = await Atividade.create({
-                sala, data, carga_horaria, vagas, atividade, horario, inscricoes
+                sala, data, carga_hr, vagas, atividade, horario, inscricoes
             })
             return res.status(201).json(evento)
         } catch (error) {
@@ -27,20 +26,20 @@ class AtividadeDAO {
             const info = await Atividade.findAll()
             return res.status(200).json(info)
         } catch (error) {
-            return res.status(400).json({ erro: 'erro ao listar Atividades', mensagem: error.message })
+            return res.status(500).json({ erro: 'erro ao listar Atividades', mensagem: error.message })
         }
     }
     async atualizar(req, res) {
         try {
-            const atividadeA = await Atividade.findByPK(req.params.id)
+            const atividadeA = await Atividade.findByPk(req.params.id)
             if (!atividadeA) {
                 return res.status(404).json({
                     erro: 'atividade não cadastrada'
                 })
             }
-            const { sala, data, carga_horaria, vagas, atividade, horario, inscricoes } = req.body
+            const { sala, data, carga_hr, vagas, atividade, horario, inscricoes } = req.body
             await atividadeA.update({
-                sala, data, carga_horaria, vagas, atividade, horario, inscricoes
+                sala, data, carga_hr, vagas, atividade, horario, inscricoes
             })
             return res.status(200).json(atividadeA)
         } catch (error) {
@@ -49,13 +48,18 @@ class AtividadeDAO {
     }
     async deletar(req, res) {
         try {
-            const atividadeA = await Atividade.findByPK(req.params.id)
+            const atividadeA = await Atividade.findByPk(req.params.id)
             if (!atividadeA) {
                 return res.status(404).json({
                     erro: 'atividade não encontrada'
                 })
             }
-            const { sala, data, carga_horaria, vagas, atividade, horario, inscricoes } = req.body
+
+            await atividadeA.destroy()
+            
+            return res.status(200).json({
+                mensagem: 'Atividade excluida com sucesso!'
+            })
 
         } catch (error) {
             res.status(400).json(error.message)
@@ -63,19 +67,22 @@ class AtividadeDAO {
     }
     async substituir(req, res) {
         try {
-            const atividadeA = await Atividade.findByPK(req.params.id)
+            const atividadeA = await Atividade.findByPk(req.params.id)
             if (!atividadeA) {
                 return res.status(404).json({
                     erro: 'atividade não encontrada'
                 })
             }
-            if (!sala || !data || !carga_horaria || !vagas || !atividade || !horario || !inscricoes) {
+
+            const {sala, data, carga_hr, vagas, atividade, horario, inscricoes} = req.body
+
+            if (sala === undefined || data === undefined || carga_hr === undefined || vagas === undefined || atividade === undefined || horario === undefined || inscricoes === undefined) {
                 return res.status(400).json({
                     erro: 'Todos os campos são obrigatórios!!'
                 })
             }
             await atividadeA.update({
-                sala, data, carga_horaria, vagas, atividade, horario, inscricoes
+                sala, data, carga_hr, vagas, atividade, horario, inscricoes
             })
             return res.status(200).json(atividadeA)
         }catch (error) {
