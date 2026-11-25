@@ -3,7 +3,7 @@ const express = require('express')
 
 const router = express.Router()
 
-const AtividadeDAO = require('AtividadeDAO.js')
+const AtividadeDAO = require('../controllers/AtividadeDAO.js')
 
 
 router.post('/', (req, res) => {
