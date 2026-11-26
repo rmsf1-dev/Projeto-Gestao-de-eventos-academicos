@@ -1,7 +1,6 @@
 const express = require('express');
 const sequelize = require('./config/database')
-
-
+require('./associacoes');
 require('./atividade/modelo/Atividade')
 require('./palestrante/modelo/palestrante')
 require('./participante/modelo/Participante')

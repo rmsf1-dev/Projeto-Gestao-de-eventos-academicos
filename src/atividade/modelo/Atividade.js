@@ -7,6 +7,10 @@ const Atividade = sequelize.define('Atividade',{
         primaryKey: true,
         autoIncrement: true
     },
+    nome:{
+        type: DataTypes.STRING,
+        allowNull:false
+    },
     sala:{
         type: DataTypes.STRING,
         allowNull: false
@@ -34,42 +38,13 @@ const Atividade = sequelize.define('Atividade',{
     inscricoes:{
         type: DataTypes.INTEGER,
         allowNull:false
+    },
+    declaracao:{
+        type: DataTypes.STRING,
+        allowNull:true
     }
 })
 
 module.exports = Atividade
 
 
-/*class Evento {
-    #id
-    #sala
-    #data
-    #carga_horaria
-    #vagas
-    #atividade
-    #horario
-    #inscricoes
-    constructor(id, s, dt, ch, v,t, h, i) {
-        this.#id = id
-        this.#atividade = t
-        this.#carga_horaria = ch
-        this.#vagas = v
-        this.#horario = h
-        this.#inscricoes = i
-        this.#sala = s
-    }
-
-}
-
-class Palestra extends Evento {
-    #palestrante
-}
-class Minicurso extends Evento {
-
-}
-
-const tbl1 = new Evento(1,"sala-1","2026-1-2",2000,20,"marcacao","20h-19h",1)
-const dao1 = new EventoDAO()
-dao1.inserir(tbl1)
-
-export {dao1}*/
