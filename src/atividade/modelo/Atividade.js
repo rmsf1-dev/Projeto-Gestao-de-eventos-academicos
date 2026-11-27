@@ -28,7 +28,7 @@ const Atividade = sequelize.define('Atividade',{
         allowNull:false
     },
     atividade:{
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM('Palestra', 'Minicurso'),
         allowNull:false
     },
     horario:{

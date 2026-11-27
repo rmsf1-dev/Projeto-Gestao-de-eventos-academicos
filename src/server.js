@@ -12,11 +12,13 @@ app.use(express.json());
 const participanteRoutes = require('./participante/routes/ParticipanteRoutes');
 const palestranteRoutes = require('./palestrante/routes/palestranteRoutes')
 const atividadeRoutes = require('./atividade/routes/Atividaderotas')
+const inscricaoRoutes = require('./inscricao/rotas/IncricaoRoutes')
 
 
 app.use('/participantes', participanteRoutes)  // /participantes vai combinar com os caminhos do arquivo das rotas
 app.use('/palestrantes', palestranteRoutes)
 app.use('/atividades', atividadeRoutes)
+app.use('/inscricoes', inscricaoRoutes)
 
 app.get('/', (req, res) => {
     res.send('servidor de gestão de eventos funcionando')

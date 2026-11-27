@@ -1,6 +1,7 @@
 const Atividade = require('./atividade/modelo/Atividade');
 const Palestrante = require('./palestrante/modelo/palestrante');
 const Participante = require('./participante/modelo/Participante');
+const Inscricao = require('./inscricao/modelo/Inscricao')
 
 // Relacionamento N:N entre Palestrante e Atividade
 Palestrante.belongsToMany(Atividade, {
@@ -13,15 +14,20 @@ Atividade.belongsToMany(Palestrante, {
 
 // Relacionamento N:N entre Participante e Atividade
 Participante.belongsToMany(Atividade, {
-    through: 'ParticipanteAtividade'
+    through: Inscricao
 });
 
 Atividade.belongsToMany(Participante, {
-    through: 'ParticipanteAtividade'
+    through: Inscricao
 });
+
+Inscricao.belongsTo(Atividade);
+
+Inscricao.belongsTo(Participante)
 
 module.exports = {
     Atividade,
     Palestrante,
-    Participante
+    Participante,
+    Inscricao
 };
